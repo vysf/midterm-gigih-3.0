@@ -9,7 +9,7 @@ see: `infrastructures\database\mongoDB\models`
 
 ## API Structure
 The api structure based on api minimum requirment. Also I tried to implement clean architectur on this project.
-for more you can see `postman` forlder
+For more you can see `postman` forlder
 
 ## How to run
 You can use this command to run:
