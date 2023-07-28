@@ -20,3 +20,8 @@ or for production
 ```
 npm run start
 ```
+
+## Next update (I hope)
+- [ ] Make this readme very clear and easy to understand
+- [ ] Learn more about clean architecture and test driven development for API
+- [ ] Add authentication and authorization feature.
