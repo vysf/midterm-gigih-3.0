@@ -1,0 +1,94 @@
+{
+	"info": {
+		"_postman_id": "4351a104-0bee-439c-b57f-69820e09ddf1",
+		"name": "midterm-gigih",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "14455487"
+	},
+	"item": [
+		{
+			"name": "register user",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"johndoe\",\r\n    \"email\": \"johndoe@email.com\",\r\n    \"password\": \"johndoe\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://127.0.0.1:5002/users"
+			},
+			"response": []
+		},
+		{
+			"name": "add video",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"ownerId\": \"user-a4239c8e-1911-4d89-a258-f9db097a7049\",\r\n    \"thumbnail\": \"http://127.0.0.1:5002/videos/thumbnail\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://127.0.0.1:5002/videos"
+			},
+			"response": []
+		},
+		{
+			"name": "get list videos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://127.0.0.1:5002/videos"
+			},
+			"response": []
+		},
+		{
+			"name": "add comment in video",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"videoId\": \"video-315011c9-1115-4080-b76b-4ffe88d7543f\",\r\n    \"comment\": \"test coment\",\r\n    \"username\": \"johndoe\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://127.0.0.1:5002/comments"
+			},
+			"response": []
+		},
+		{
+			"name": "get list comments in video",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"videoId\": \"video-315011c9-1115-4080-b76b-4ffe88d7543f\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://127.0.0.1:5002/comments"
+			},
+			"response": []
+		}
+	]
+}
