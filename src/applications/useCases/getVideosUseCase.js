@@ -1,8 +1,8 @@
-const VideoRepository = require('../../domains/repositories/videoRepository');
+// const VideoRepository = require('../../domains/repositories/videoRepository');
 
 class GetVideosUseCase {
-  constructor() {
-    this.videoRepository = new VideoRepository();
+  constructor(videoRepository) {
+    this.videoRepository = videoRepository;
   }
 
   async execute(useCaseQuery) {
@@ -12,4 +12,4 @@ class GetVideosUseCase {
   }
 }
 
-module.exports = new GetVideosUseCase();
+module.exports = GetVideosUseCase;

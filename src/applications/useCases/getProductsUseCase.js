@@ -1,8 +1,8 @@
-const ProductRepository = require('../../domains/repositories/productRepository');
+// const ProductRepository = require('../../domains/repositories/productRepository');
 
 class GetProductsUseCase {
-  constructor() {
-    this.productRepository = new ProductRepository();
+  constructor(productRepository) {
+    this.productRepository = productRepository;
   }
 
   async execute(useCaseQuery) {
@@ -12,4 +12,4 @@ class GetProductsUseCase {
   }
 }
 
-module.exports = new GetProductsUseCase();
+module.exports = GetProductsUseCase;

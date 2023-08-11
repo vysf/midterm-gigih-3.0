@@ -1,12 +1,18 @@
 /* eslint-disable no-console */
 const express = require('express');
 const bodyParser = require('body-parser');
-const videoController = require('../adapters/controllers/videoController');
-const commentController = require('../adapters/controllers/commentController');
-const productController = require('../adapters/controllers/productController');
-// const authMiddleware = require('../adapters/middlewares/authMiddleware');
+
 const { connectToDatabase } = require('../interfaces/dataSources/databases/mongoose');
 const logger = require('../interfaces/services/logger');
+const injection = require('../interfaces/services/injection');
+
+const VideoController = require('../adapters/controllers/videoController');
+const ProductController = require('../adapters/controllers/productController');
+const CommentController = require('../adapters/controllers/commentController');
+
+const videoRouter = require('../interfaces/routes/videoRouter');
+const productRouter = require('../interfaces/routes/productRouter');
+const commentRouter = require('../interfaces/routes/commentRouter');
 
 class App {
   constructor() {
@@ -22,13 +28,16 @@ class App {
         extended: true,
       }),
     );
-    // this.app.use(authMiddleware);
+
+    // Controllers
+    const videoController = new VideoController(injection);
+    const productController = new ProductController(injection);
+    const commentController = new CommentController(injection);
 
     // Routes
-    // this.app.use('/v1', userController);
-    this.app.use('/v1', videoController);
-    this.app.use('/v1', productController);
-    this.app.use('/v1', commentController);
+    this.app.use('/v1', videoRouter(videoController));
+    this.app.use('/v1', productRouter(productController));
+    this.app.use('/v1', commentRouter(commentController));
 
     // Connect to the database
     connectToDatabase();

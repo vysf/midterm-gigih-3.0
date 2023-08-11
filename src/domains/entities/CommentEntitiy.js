@@ -23,12 +23,12 @@ class CommentEntitiy {
     }
 
     if (
-      typeof id !== 'string'
+      typeof id !== 'object'
       || typeof name !== 'string'
       || typeof body !== 'string'
       || typeof videoId !== 'string'
       || typeof imageUrl !== 'string'
-      || typeof createdAt !== 'string'
+      || typeof createdAt !== 'object'
     ) {
       throw new Error('COMMENT.NOT_MEET_DATA_TYPE_SPECIFICATION');
     }

@@ -1,15 +1,17 @@
-/* eslint-disable class-methods-use-this */
 const { paginate } = require('../../interfaces/services/paginationService');
 const Product = require('../entities/ProductEntitiy');
-const ProductModel = require('../models/productModel');
 
 class ProductRepository {
+  constructor(database) {
+    this.database = database;
+  }
+
   async findAll(pageNumber, pageSize) {
     try {
       const { pageNumber: currentPage, pageSize: limit, skip } = paginate(pageNumber, pageSize);
-      const totalProduct = await ProductModel.countDocuments();
+      const totalProduct = await this.database.countDocuments();
       const totalPages = Math.ceil(totalProduct / limit);
-      const products = await ProductModel.find({}).skip(skip).limit(limit);
+      const products = await this.database.find({}).skip(skip).limit(limit);
 
       return {
         products: products.map(({ _doc: product }) => new Product(product)),

@@ -1,9 +1,9 @@
 const CreateCommentEntitiy = require('../../domains/entities/CreateCommentEntitiy');
-const CommentRepository = require('../../domains/repositories/commentRepository');
+// const CommentRepository = require('../../domains/repositories/commentRepository');
 
 class CreateCommentUseCase {
-  constructor() {
-    this.commentRepository = new CommentRepository();
+  constructor(commentRepository) {
+    this.commentRepository = commentRepository;
   }
 
   async execute(useCaseBody, useCaseParam) {
@@ -13,4 +13,4 @@ class CreateCommentUseCase {
   }
 }
 
-module.exports = new CreateCommentUseCase();
+module.exports = CreateCommentUseCase;
