@@ -1,3 +1,5 @@
+const sendResponse = require('../../interfaces/services/responseUtil');
+
 class ProductController {
   constructor(injection) {
     this.injection = injection;
@@ -13,21 +15,14 @@ class ProductController {
         limit,
       } = await getProductsUseCase.execute(req.query);
 
-      const response = {
-        status: 'succes',
+      sendResponse(res, 200, 'success', null, {
         products,
         currentPage,
         totalPage,
         limit,
-      };
-
-      res.status(200).json(response);
+      });
     } catch (error) {
-      const response = {
-        status: 'fail',
-        message: error.message,
-      };
-      res.status(400).json(response);
+      sendResponse(res, 400, 'fail', error.message, null);
     }
   }
 }

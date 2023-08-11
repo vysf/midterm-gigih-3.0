@@ -1,3 +1,5 @@
+const sendResponse = require('../../interfaces/services/responseUtil');
+
 class CommentController {
   constructor(injection) {
     this.injection = injection;
@@ -13,21 +15,14 @@ class CommentController {
         limit,
       } = await getCommentsUseCase.execute(req.params, req.query);
 
-      const response = {
-        status: 'succes',
+      sendResponse(res, 200, 'success', null, {
         comments,
         currentPage,
         totalPage,
         limit,
-      };
-
-      res.status(200).json(response);
+      });
     } catch (error) {
-      const response = {
-        status: 'fail',
-        message: error.message,
-      };
-      res.status(400).json(response);
+      sendResponse(res, 400, 'fail', error.message, null);
     }
   }
 
@@ -35,18 +30,9 @@ class CommentController {
     const { createCommentUseCase } = this.injection;
     try {
       await createCommentUseCase.execute(req.body, req.params);
-
-      const response = {
-        status: 'succes',
-      };
-
-      res.status(201).json(response);
+      sendResponse(res, 201, 'success', 'comment added successfully', null);
     } catch (error) {
-      const response = {
-        status: 'fail',
-        message: error.message,
-      };
-      res.status(400).json(response);
+      sendResponse(res, 400, 'fail', error.message, null);
     }
   }
 }

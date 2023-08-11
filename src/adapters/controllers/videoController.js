@@ -1,3 +1,5 @@
+const sendResponse = require('../../interfaces/services/responseUtil');
+
 class VideoController {
   constructor(injection) {
     this.injection = injection;
@@ -13,20 +15,14 @@ class VideoController {
         limit,
       } = await getVideosUseCase.execute(req.query);
 
-      const response = {
-        status: 'succes',
+      sendResponse(res, 200, 'success', null, {
         videos,
         currentPage,
         totalPage,
         limit,
-      };
-      res.status(200).json(response);
+      });
     } catch (error) {
-      const response = {
-        status: 'fail',
-        message: error.message,
-      };
-      res.status(400).json(response);
+      sendResponse(res, 400, 'fail', error.message, null);
     }
   }
 
@@ -35,18 +31,11 @@ class VideoController {
     try {
       const video = await detailVideoUseCase.execute(req.params);
 
-      const response = {
-        status: 'succes',
+      sendResponse(res, 200, 'success', null, {
         video,
-      };
-
-      res.status(200).json(response);
+      });
     } catch (error) {
-      const response = {
-        status: 'fail',
-        message: error.message,
-      };
-      res.status(400).json(response);
+      sendResponse(res, 400, 'fail', error.message, null);
     }
   }
 }
