@@ -3,7 +3,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 
 const { connectToDatabase } = require('../interfaces/dataSources/databases/mongoose');
-const logger = require('../interfaces/services/logger');
+const SimpleLogger = require('../interfaces/services/logger');
 const injection = require('../interfaces/services/injection');
 
 const VideoController = require('../adapters/controllers/videoController');
@@ -17,10 +17,23 @@ const commentRouter = require('../interfaces/routes/commentRouter');
 class App {
   constructor() {
     this.app = express();
+    this.moduleName = this.constructor.name;
+    this.logger = new SimpleLogger(this.moduleName);
     this.configure();
   }
 
   configure() {
+    // Logger
+    this.app.use((req, res, next) => {
+      try {
+        this.logger.info(`${req.method} ${req.url}`);
+        next();
+      } catch (error) {
+        this.logger.error(`${error}`);
+        next(error); // Mengirimkan kesalahan ke penangan kesalahan global
+      }
+    });
+
     // Middleware
     this.app.use(bodyParser.json());
     this.app.use(
@@ -41,17 +54,11 @@ class App {
 
     // Connect to the database
     connectToDatabase();
-
-    // Logger
-    this.app.use((req, res, next) => {
-      logger(`${req.method} ${req.url}`);
-      next();
-    });
   }
 
   start(port, host) {
     this.app.listen(port, () => {
-      console.log(`Server is running on port http://${host}:${port}`);
+      this.logger.info(`Server is running on port http://${host}:${port}`);
     });
   }
 }

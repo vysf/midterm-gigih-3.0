@@ -1,6 +1,25 @@
 /* eslint-disable no-console */
-const logger = (message) => {
-  console.log(message);
-};
+class SimpleLogger {
+  constructor(moduleName) {
+    this.moduleName = moduleName;
+    this.logLevel = {
+      INFO: 'INFO',
+      ERROR: 'ERROR',
+    };
+  }
 
-module.exports = logger;
+  log(level, message) {
+    const timestamp = new Date().toISOString();
+    console.log(`[${timestamp}] [${this.moduleName}] [${level}] - ${message}`);
+  }
+
+  info(message) {
+    this.log(this.logLevel.INFO, message);
+  }
+
+  error(message) {
+    this.log(this.logLevel.ERROR, message);
+  }
+}
+
+module.exports = SimpleLogger;

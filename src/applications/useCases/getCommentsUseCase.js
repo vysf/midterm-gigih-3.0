@@ -1,5 +1,3 @@
-// const CommentRepository = require('../../domains/repositories/commentRepository');
-
 class GetCommentsUseCase {
   constructor(commentRepository) {
     this.commentRepository = commentRepository;

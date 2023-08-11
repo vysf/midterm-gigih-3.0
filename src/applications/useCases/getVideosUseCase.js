@@ -1,5 +1,3 @@
-// const VideoRepository = require('../../domains/repositories/videoRepository');
-
 class GetVideosUseCase {
   constructor(videoRepository) {
     this.videoRepository = videoRepository;

@@ -1,5 +1,3 @@
-// const ProductRepository = require('../../domains/repositories/productRepository');
-
 class GetProductsUseCase {
   constructor(productRepository) {
     this.productRepository = productRepository;

@@ -1,5 +1,4 @@
 const CreateCommentEntitiy = require('../../domains/entities/CreateCommentEntitiy');
-// const CommentRepository = require('../../domains/repositories/commentRepository');
 
 class CreateCommentUseCase {
   constructor(commentRepository) {
