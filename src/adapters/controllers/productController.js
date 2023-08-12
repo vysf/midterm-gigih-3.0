@@ -8,21 +8,13 @@ class ProductController {
   }
 
   async getAllProducts(req, res) {
-    this.logger.info(JSON.stringify(req.query));
+    // this.logger.info(JSON.stringify(req.query));
     const { getProductsUseCase } = this.injection;
     try {
-      const {
-        products,
-        currentPage,
-        totalPage,
-        limit,
-      } = await getProductsUseCase.execute(req.query);
+      const products = await getProductsUseCase.execute();
 
       sendResponse(res, 200, 'success', null, {
         products,
-        currentPage,
-        totalPage,
-        limit,
       });
 
       this.logger.info('Success to get all products request');

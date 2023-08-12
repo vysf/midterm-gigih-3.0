@@ -8,21 +8,13 @@ class VideoController {
   }
 
   async getAllVideos(req, res) {
-    this.logger.info(JSON.stringify(req.query));
+    // this.logger.info(JSON.stringify(req.query));
     const { getVideosUseCase } = this.injection;
     try {
-      const {
-        videos,
-        currentPage,
-        totalPage,
-        limit,
-      } = await getVideosUseCase.execute(req.query);
+      const videos = await getVideosUseCase.execute();
 
       sendResponse(res, 200, 'success', null, {
         videos,
-        currentPage,
-        totalPage,
-        limit,
       });
       this.logger.info('Success to get all videos request');
     } catch (error) {

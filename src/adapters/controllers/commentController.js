@@ -11,18 +11,10 @@ class CommentController {
     this.logger.info(`${JSON.stringify(req.params)} - ${JSON.stringify(req.query)}`);
     const { getCommentsUseCase } = this.injection;
     try {
-      const {
-        comments,
-        currentPage,
-        totalPage,
-        limit,
-      } = await getCommentsUseCase.execute(req.params, req.query);
+      const comments = await getCommentsUseCase.execute(req.params);
 
       sendResponse(res, 200, 'success', null, {
         comments,
-        currentPage,
-        totalPage,
-        limit,
       });
 
       this.logger.info(`Success to get all comments from videoId : ${req.params.id}`);

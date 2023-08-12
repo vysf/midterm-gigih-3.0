@@ -3,9 +3,8 @@ class GetProductsUseCase {
     this.productRepository = productRepository;
   }
 
-  async execute(useCaseQuery) {
-    const { pageNumber, pageSize } = useCaseQuery;
-    const products = await this.productRepository.findAll(pageNumber, pageSize);
+  async execute() {
+    const products = await this.productRepository.findAll();
     return products;
   }
 }

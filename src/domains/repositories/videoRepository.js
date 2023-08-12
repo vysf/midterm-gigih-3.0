@@ -1,4 +1,4 @@
-const { paginate } = require('../../interfaces/services/paginationService');
+/* eslint-disable no-underscore-dangle */
 const Video = require('../entities/VideoEntitiy');
 
 class VideoRepository {
@@ -6,19 +6,10 @@ class VideoRepository {
     this.database = database;
   }
 
-  async findAll(pageNumber = 1, pageSize = 10) {
+  async findAll() {
     try {
-      const { pageNumber: currentPage, pageSize: limit, skip } = paginate(pageNumber, pageSize);
-      const totalVideo = await this.database.countDocuments();
-      const totalPages = Math.ceil(totalVideo / limit);
-      const videos = await this.database.find({}).skip(skip).limit(limit);
-
-      return {
-        videos: videos.map(({ _doc: video }) => new Video(video)),
-        totalPage: totalPages,
-        currentPage,
-        limit,
-      };
+      const videos = await this.database.find({});
+      return videos.map(({ _doc: video }) => new Video(video));
     } catch (error) {
       throw new Error(error.message);
     }

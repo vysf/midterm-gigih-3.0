@@ -3,9 +3,8 @@ class GetVideosUseCase {
     this.videoRepository = videoRepository;
   }
 
-  async execute(useCaseQuery) {
-    const { pageNumber, pageSize } = useCaseQuery;
-    const videos = await this.videoRepository.findAll(pageNumber, pageSize);
+  async execute() {
+    const videos = await this.videoRepository.findAll();
     return videos;
   }
 }

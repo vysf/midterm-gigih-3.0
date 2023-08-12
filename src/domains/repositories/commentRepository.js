@@ -1,6 +1,4 @@
 /* eslint-disable new-cap */
-/* eslint-disable class-methods-use-this */
-const { paginate } = require('../../interfaces/services/paginationService');
 const Comment = require('../entities/CommentEntitiy');
 
 class CommentRepository {
@@ -8,19 +6,10 @@ class CommentRepository {
     this.database = database;
   }
 
-  async findByVideoId(videoId, pageNumber, pageSize) {
+  async findByVideoId(videoId) {
     try {
-      const { pageNumber: currentPage, pageSize: limit, skip } = paginate(pageNumber, pageSize);
-      const totalComment = await this.database.countDocuments();
-      const totalPages = Math.ceil(totalComment / limit);
-      const comments = await this.database.find({ videoId }).skip(skip).limit(limit);
-
-      return {
-        comments: comments.map(({ _doc: comment }) => new Comment(comment)),
-        totalPage: totalPages,
-        currentPage,
-        limit,
-      };
+      const comments = await this.database.find({ videoId });
+      return comments.map(({ _doc: comment }) => new Comment(comment));
     } catch (error) {
       throw new Error(error.message);
     }
