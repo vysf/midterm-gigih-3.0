@@ -2,6 +2,7 @@
 /* eslint-disable no-console */
 const express = require('express');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 
 const { connectToDatabase } = require('../interfaces/dataSources/databases/mongoose');
 const SimpleLogger = require('../interfaces/services/logger');
@@ -29,6 +30,12 @@ class App {
 
   configure() {
     // Middlewares
+    // this.app.use(cors({
+    //   origin: ['http://localhost:5173/', 'http://172.23.16.1:5173/', 'http://192.168.1.13:5173/'],
+    // }));
+    this.app.use(cors({
+      origin: ['http://localhost:5173', 'http://172.23.16.1:5173', 'http://192.168.1.13:5173'],
+    }));
     this.app.use(bodyParser.json());
     this.app.use(
       bodyParser.urlencoded({
