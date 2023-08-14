@@ -7,20 +7,20 @@ class ProductController {
     this.logger = new SimpleLogger(this.constructor.name);
   }
 
-  async getAllProducts(req, res) {
+  async getAllProducts(req, res, next) {
     // this.logger.info(JSON.stringify(req.query));
-    const { getProductsUseCase } = this.injection;
     try {
+      const { getProductsUseCase } = this.injection;
       const products = await getProductsUseCase.execute();
 
+      this.logger.info('Success to get all products request');
       sendResponse(res, 200, 'success', null, {
         products,
       });
-
-      this.logger.info('Success to get all products request');
     } catch (error) {
-      sendResponse(res, 400, 'fail', error.message, null);
       this.logger.error('Fail to get all products request');
+      sendResponse(res, 400, 'fail', error.message, null);
+      next(error);
     }
   }
 }

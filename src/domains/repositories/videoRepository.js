@@ -1,5 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 const Video = require('../entities/VideoEntitiy');
+const NotFoundError = require('../errors/NotFoundError');
 
 class VideoRepository {
   constructor(database) {
@@ -20,7 +21,7 @@ class VideoRepository {
       const video = await this.database.findById({ _id: id });
       return new Video(video);
     } catch (error) {
-      throw new Error('Video tidak ditemukan');
+      throw new NotFoundError('Video tidak ditemukan');
     }
   }
 }

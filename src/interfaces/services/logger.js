@@ -8,6 +8,7 @@ class SimpleLogger {
     };
   }
 
+  // All the messages onl for developer
   log(level, message) {
     const timestamp = new Date().toISOString();
     console.log(`[${timestamp}] [${this.moduleName}] [${level}] - ${message}`);
