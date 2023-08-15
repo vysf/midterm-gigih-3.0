@@ -1,6 +1,6 @@
 module.exports = {
   mongodb: {
-    uri: 'mongodb://127.0.0.1:27017/midterm-gigih',
+    uri: `${process.env.MONGODB_URI}/midterm-gigih` || 'mongodb://127.0.0.1:27017/midterm-gigih',
     options: {
       useNewUrlParser: true,
       useUnifiedTopology: true,
