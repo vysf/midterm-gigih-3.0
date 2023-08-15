@@ -4,7 +4,7 @@
   "description": "midterm gigih fullstack path",
   "main": "app.js",
   "scripts": {
-    "start": "node src/app.js",
+    "start": "node src/main.js",
     "start:dev": "nodemon src/main.js",
     "seed:all": "npm run seed:videos && npm run seed:products && npm run seed:comments",
     "seed:videos": "node src/interfaces/dataSources/seeders/videosSeed.js",

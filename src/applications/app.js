@@ -34,7 +34,7 @@ class App {
     //   origin: ['http://localhost:5173/', 'http://172.23.16.1:5173/', 'http://192.168.1.13:5173/'],
     // }));
     this.app.use(cors({
-      origin: ['http://localhost:5173', 'http://172.23.16.1:5173', 'http://192.168.1.13:5173'],
+      origin: ['http://localhost:5173', 'http://172.23.16.1:5173', 'http://10.100.3.93:5173'],
     }));
     this.app.use(bodyParser.json());
     this.app.use(
