@@ -1,7 +1,8 @@
 # Midterm GIGIH 3.0
 
 ## How to run
-First, you can populate the database using this command
+Before you run the project, make sure to complete .env file such as `PORT`, `HOST` and `MONGODB_URI`. <br>
+You can populate the database using this command
 ```
 npm run seed:all
 ```
