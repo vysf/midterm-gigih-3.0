@@ -1,17 +1,11 @@
 # Midterm GIGIH 3.0
 
-## Database Structure
-Collections:
-1. Users -> store users data
-2. Videos -> store videos data
-1. Comments -> store comments every user on specific videos data
-see: `infrastructures\database\mongoDB\models`
-
-## API Structure
-The api structure based on api minimum requirment. Also I tried to implement clean architectur on this project.
-For more you can see `postman` forlder
-
 ## How to run
+First, you can populate the database using this command
+```
+npm run seed:all
+```
+
 You can use this command to run:
 ```
 npm run start:dev
@@ -19,6 +13,210 @@ npm run start:dev
 or for production
 ```
 npm run start
+```
+
+## Database Structure
+Collections:
+1. Videos: store videos data
+```
+// videos model
+{
+
+  _id: String,
+  title: String,
+  description: String,
+  thumbnails: {
+    default: {
+      url: String,
+      width: Number,
+      height: Number,
+    },
+    medium: {
+      url: String,
+      width: Number,
+      height: Number,
+    },
+    high: {
+      url: String,
+      width: Number,
+      height: Number,
+    },
+    standard: {
+      url: String,
+      width: Number,
+      height: Number,
+    },
+    maxres: {
+      url: String,
+      width: Number,
+      height: Number,
+    }
+  }
+}
+```
+2. Comments: store comments of every user on specific videos
+```
+// comments model
+{
+  name: String,
+  body: String,
+  videoId: String,
+  imageUrl: String,
+}
+```
+3. Products -> store products
+```
+// products model
+{
+  title: String,
+  description: String,
+  price: Number,
+  discountPercentage: Number,
+  rating: Number,
+  stock: Number,
+  brand: String,
+  category: String,
+  thumbnail: String,
+  images: [String],
+}
+```
+see more on: `infrastructures\database\mongoDB\models`
+
+## API Structure
+The api structure based on api minimum requirment. I also tried to implement clean architectur on this project.
+
+#Vidoes
+- Video object
+```
+{
+  id: string
+  title: string
+  thumbnails: string
+  description: string
+}
+```
+### GET /videos
+Return list of videos.
+- URL Params <br>
+None
+- Data Params <br>
+None
+- Headers <br>
+Content-Type: application/json
+- Success Response:
+- Code: 200 <br>
+Content:
+```
+{
+  status: 'success',
+  videos: [
+    {<video_object>},
+    {<video_object>},
+    {<video_object>}
+  ]
+}
+```
+
+### GET /videos/:id
+Return video detail.
+- URL Params <br>
+Required: id=[string]
+- Data Params <br>
+None
+- Headers <br>
+Content-Type: application/json
+- Success Response:
+- Code: 200 <br>
+Content:
+```
+{
+  status: 'success',
+  video: {<video_object>}
+}
+```
+
+#Products
+- Product object
+```
+{
+  id: mongoDB id object
+  title: string
+  thumbnails: string
+  description: string
+  price: number
+}
+```
+### GET /products
+Return list of products.
+- URL Params <br>
+None
+- Data Params <br>
+None
+- Headers <br>
+Content-Type: application/json
+- Success Response:
+- Code: 200 <br>
+Content:
+```
+{
+  status: 'success',
+  products: [
+    {<product_object>},
+    {<product_object>},
+    {<product_object>}
+  ]
+}
+```
+
+#Comments
+- Comment object
+```
+{
+  id: mongoDB id object
+  name: string
+  body: string
+  videoId: string
+  imageUrl: string
+  createdAt: datetime(iso 8601)
+}
+```
+### GET /comments/:id
+Return list of comments of a specific vidoe.
+- URL Params <br>
+  Required: id=[string] (video id)
+- Data Params <br>
+None
+- Headers <br>
+Content-Type: application/json
+- Success Response:
+- Code: 200 <br>
+Content:
+```
+{
+  status: 'success',
+  comments: [
+    {<comment_object>},
+    {<comment_object>},
+    {<comment_object>}
+  ]
+}
+```
+
+### POST /comments/:id
+Create a comment of a specific vidoe.
+- URL Params <br>
+  Required: id=[string] (video id)
+- Data Params <br>
+None
+- Headers <br>
+Content-Type: application/json
+- Success Response:
+- Code: 200 <br>
+Content:
+```
+{
+  status: 'success',
+}
 ```
 
 ## Next update (I hope)
