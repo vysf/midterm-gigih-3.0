@@ -95,7 +95,7 @@ The api structure based on api minimum requirment. I also tried to implement cle
   description: string
 }
 ```
-### GET /videos
+### GET /v1/videos
 Return list of videos.
 - URL Params <br>
 None
@@ -117,7 +117,7 @@ Content:
 }
 ```
 
-### GET /videos/:id
+### GET /v1/videos/:id
 Return video detail.
 - URL Params <br>
 Required: id=[string]
@@ -146,7 +146,7 @@ Content:
   price: number
 }
 ```
-### GET /products
+### GET /v1/products
 Return list of products.
 - URL Params <br>
 None
@@ -180,7 +180,7 @@ Content:
   createdAt: datetime(iso 8601)
 }
 ```
-### GET /comments/:id
+### GET /v1/comments/:id
 Return list of comments of a specific vidoe.
 - URL Params <br>
   Required: id=[string] (video id)
@@ -202,7 +202,7 @@ Content:
 }
 ```
 
-### POST /comments/:id
+### POST /v1/comments/:id
 Create a comment of a specific vidoe.
 - URL Params <br>
   Required: id=[string] (video id)
