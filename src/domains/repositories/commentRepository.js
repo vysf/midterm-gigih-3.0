@@ -8,7 +8,7 @@ class CommentRepository {
 
   async findByVideoId(videoId) {
     try {
-      const comments = await this.database.find({ videoId });
+      const comments = await this.database.find({ videoId }).sort('-createdAt');
       return comments.map(({ _doc: comment }) => new Comment(comment));
     } catch (error) {
       throw new Error(error.message);
